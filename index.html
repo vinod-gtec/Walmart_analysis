@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Walmart Sales Prediction System</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+        }
+
+        .container {
+            width: 60%;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .about {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        small {
+            font-size: 12px;
+            color: #ddd;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: #00c6ff;
+            background-image: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .siii{
+            color: #2f33b9;
+            background-color: rgb(248, 248, 246);
+            background-blend-mode: color-burn;
+            font-size: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <center><h1 class="siii">Walmart and Co</h1></center>
+
+<div class="container">
+
+    <h1>Walmart Weekly Sales Predictor</h1>
+
+    <div class="about">
+        This machine learning system predicts weekly sales for Walmart stores using a trained Random Forest model.
+        The model was built using historical retail data and considers factors such as store performance,
+        economic indicators (CPI & Unemployment), seasonal trends, and environmental conditions.
+        
+    </div>
+
+    <form action="/predict" method="post">
+
+        <div class="form-group">
+            <label>Store ID</label>
+            <input type="number" name="Store" required>
+            <small>Enter store number (e.g., 1 to 45). Different stores have different sales capacity.</small>
+        </div>
+
+        <div class="form-group">
+            <label>Holiday Flag (0 or 1)</label>
+            <input type="number" name="Holiday_Flag" required>
+            <small>Enter 1 if it is a holiday week, otherwise 0.</small>
+        </div>
+
+        <div class="form-group">
+            <label>Temperature</label>
+            <input type="number" step="any" name="Temperature" required>
+            <small>Average weekly temperature (in Fahrenheit).</small>
+        </div>
+
+        <div class="form-group">
+            <label>Fuel Price</label>
+            <input type="number" step="any" name="Fuel_Price" required>
+            <small>Fuel price in the region (affects customer spending behavior).</small>
+        </div>
+
+        <div class="form-group">
+            <label>CPI</label>
+            <input type="number" step="any" name="CPI" required>
+            <small>Consumer Price Index — indicates inflation level.</small>
+        </div>
+
+        <div class="form-group">
+            <label>Unemployment Rate</label>
+            <input type="number" step="any" name="Unemployment" required>
+            <small>Regional unemployment rate affecting purchasing power.</small>
+        </div>
+
+        <div class="form-group">
+            <label>Month (1–12)</label>
+            <input type="number" name="Month" min="1" max="12" required>
+            <small>Month number. December typically shows highest sales.</small>
+        </div>
+
+        <button type="submit" class="btn">Predict Weekly Sales</button>
+
+    </form>
+
+    {% if prediction_text %}
+    <div class="result">
+        {{ prediction_text }}
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
