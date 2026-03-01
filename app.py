@@ -9,7 +9,7 @@ import joblib
 app=Flask(__name__)
 # Download model only if not present
 if not os.path.exists("model.pkl"):
-    url = "https://drive.google.com/uc?id=YOUR_FILE_ID"
+    url = "https://drive.google.com/file/d/1bQ4_9QfLsmYARRpRLnqyMUSeTZYy739Y/view?usp=sharing"
     gdown.download(url, "model.pkl", quiet=False)
 
 # Now load the model
@@ -44,3 +44,4 @@ def predict():
 if __name__ == "__main__":
 
     app.run(debug=True)
+
